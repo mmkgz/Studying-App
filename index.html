@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <style>
@@ -5,55 +6,62 @@
         font-family: "antipasto";
         src: url("./assets/AntipastoPro-Medium_trial.ttf");
     }
+#imadiv{
+    width:600px;
+    position:relative;
+    left:50%;
+    height:250px;
+    transform:translateX(-50%);
+    overflow:visible;
+}
     #container{
         position:absolute;
         background-image:url(https://media.istockphoto.com/id/470721440/vector/books-seamless-pattern.jpg?s=612x612&w=0&k=20&c=SBWwuWALkou5kDTDq6_V7SGuBMJ4vxTK3y15B9ZSFDE=);
-        left:0;right:0;top:0;bottom:0;
+        left:0;right:0;top:0;bottom:-100%;
         text-align:center;
     }
-    #background-wrapper{
-        position:absolute;
-        left:50%;
-        transform:translateX(-50%);
-        width:90%;
-        background-image: linear-gradient(to right,transparent,rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806),rgba(25, 66, 132, 0.806), transparent);
-        top:0;
-        bottom:0;
-    }
-    #imadiv{
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-evenly;
-        width:75%;
-        left:50%;
-        position:absolute;
-        transform:translateX(-50%);
+    #cover{
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:15%;
+	right:15%;
+	background-color:rgba(0, 95, 196, 0.7);
     }
     .ima{
-        width:30%;
-        height:250px;
-        font-size:2.3em;
-        border-radius:20px 20px;
-    }
-    *{
-        font-family: antipasto;
-    }
-    </style>
-    <title>Study with Studdy Buddy!</title>
-    
-    <div id = "container">
-        <div id="background-wrapper">
-            <h1 style="font-size:4em">Welcome to Studdy Buddy!</h1>
-    
-            <h2 style="font-size:2.5em">Ready to <span style="color:aliceblue">Study?</span></h2>
-            <div id="imadiv">
-                <button class="ima">I'm a <b>Teacher</b></button>
-                <button class="ima">I'm a <b>Student</b></button>
-                <button onclick="location.assign('/login')"class="ima">I'm a <b>Self-Learner</b></button>
-            </div>
-        </div>
-    </div>
-    <script>
-    
-    </script>
+    width:45%;
+    height:250px;
+    font-size:2.3em;
+    border-radius:20px 20px;
+
+}
+.transhover:hover {
+  background-color:transparent;
+}
+
+</style>
+<title>Studdy Buddy</title>
+
+<div id = "container">
+  <div id="cover">
+  <h1 style="font-size:3em">Welcome to Studdy Buddy!</h1>
+  <hr>
+  <h2>Ready to <b>Learn</b>?</h2>
+  <div id="imadiv">
+    <button class="ima transhover" style="float:left;left:10px;background-color:">I'm a <b>Teacher</b></button>
+
+    <button class="ima transhover" style="float:right;right:10px">I'm a <b>Student</b></button>
+
+  </div>
+  <h2>OR</h2>
+  <button class="imadiv transhover" style="margin-top:10px;height:100px;width:150px;margin-bottom:15px;">I'm a <b>Self-Learner</b></button>
+  <hr><br>
+  <h1>Our Mission</h1>
+  <p style="padding-left:20%;padding-right:20%;text-align:left"> &#9; Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+</div>
+</div>
+<script>
+
+</script>
 </html>
