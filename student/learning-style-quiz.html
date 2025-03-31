@@ -1,25 +1,229 @@
 <!DOCTYPE HTML>
 <html>
   <style>
-    @font-face {
-      font-family: "antipasto";
-      src: url("./assets/AntipastoPro-Medium_trial.ttf");
+    *{
+      font-family: "Verdana";
     }
-    #container{
+    #container {
       text-align: center;
+      background-color:#73a6ff;
+      position:absolute;
+      left:0;right:0;top:0;bottom:0;
     }
-    .quizlabel{
-      font-size:1.25em;
+
+    .quizlabel {
+      font-size: 2em;
+      font-weight: 650;
     }
-    input[type="range"]{
-      width:200px;
+
+    input[type="range"] {
+      width: 200px;
+      color:grey
+    }
+
+    input[type="radio"] {
+      width:19px;
+      height: 19px;
+    }
+
+    #submitbutton {
+      width: 200px;
+      height: 40px;
+    }
+
+    label {
+      font-size: 1.75em;
+    }
+    
+    #head {
+      font-size: 3em;
+    }
+
+    #form {
+      position: absolute;
+      top:150px;
+      left: 0%;
+      right: 0%;
+      background-color:#73a6ff;
     }
   </style>
   <div id="container">
-    <h1>Student Learning Style Quiz</h1>
-    <label class='quizlabel'>Would you rather study at home or at the library with friends?</label>
-    <br>
-    (At Home) 1<input style="margin:10px;"id="classCodeInput"type="range" max=5 min=1>5 (With Friends)
-   
+    <h1 id="head">Student Learning Style Quiz</h1>
+    <div id="resultstab" style="display:none">
+      <hr>
+      <h1>You are:</h1>
+      <h2 id="indep">
+        <br>
+      </h2>p
+      <h2 id="dep">
+        <br>
+      </h2>
+      <br>
+      <h2 id="aud">
+        <br>
+        <hr>
+        <br>
+      </h2>
+      <h2 id="vis">
+        <br>
+      </h2>
+      <h2 id="kin">
+        <br>
+      </h2>
+    </div>
+    <div id="form">
+      <label class='quizlabel'>Would you rather study at home or at the library with friends?</label><br>
+      <br> <label>(At Home) 1 </label><input style="margin:10px;" id="indepordep" type="range" max=7 min=1><label>7 (With Friends)</label> 
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="first">You prefer:</label>
+      <br>
+      <input type="radio" value="auditory" name="first" id="fir1">
+      <label for="fir1">listening to instructions rather than reading</label>
+      <br>
+      <input type="radio" value="visual" name="first" id="fir2">
+      <label for="fir2">analyzing pictures, graphs, or charts</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="first" id="fir3">
+      <label for="fir3">handling physical objects in order to figure out how they work</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="remember">You remember things by:</label>
+      <br>
+      <input type="radio" value="auditory" name="remember" id="rem1">
+      <label for="rem1">saying them out loud repeatedly or using mnemonics</label>
+      <br>
+      <input type="radio" value="visual" name="remember" id="rem2">
+      <label for="rem2">watching a demonstration or looking at a drawing or image</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="remember" id="rem3">
+      <label for="rem3">using dance or hand and body motions</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="action">You can do actions by:</label>
+      <br>
+      <input type="radio" value="auditory" name="action" id="act1">
+      <label for="act1">listening to instructions</label>
+      <br>
+      <input type="radio" value="visual" name="action" id="act2">
+      <label for="act2">watching a demonstration</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="action" id="act3">
+      <label for="act3">experiencing or trying them yourself</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel'>You are more likely to remember someone’s:</label>
+      <br>
+      <input type="radio" value="auditory" name="peoplememory" id="peo1">
+      <label for="peo1">name</label>
+      <br>
+      <input type="radio" value="visual" name="peoplememory" id="peo2">
+      <label for="peo2">face</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="peoplememory" id="peo3">
+      <label for="peo3">hug</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="cat">When you see the word 'cat', what do you do?</label>
+      <br>
+      <input type="radio" value="visual" name="cat" id="cat1">
+      <label for="cat1">picture a cat in your mind</label>
+      <br>
+      <input type="radio" value="auditory" name="cat" id="cat2">
+      <label for="cat2">say the word cat to yourself / think of words that describe a cat</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="cat" id="cat3">
+      <label for="cat3">think about being with one (stroking it or hearing it meow) </label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="class">What's your favorite class?</label>
+      <br>
+      <input type="radio" value="auditory" name="class" id="cla1">
+      <label for="cla1">music</label>
+      <br>
+      <input type="radio" value="visual" name="class" id="cla2">
+      <label for="cla2">art</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="class" id="cla3">
+      <label for="cla3">gym / P.E.</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <button id="submitbutton" onclick="submitButton()">Submit</button>
+      <br>
+    </div>
   </div>
+  <script>
+    function average(inputs) {
+      var total = 0;
+      for (var i = 0; i < inputs.length; i++) total += inputs[i];
+      var output = [];
+      for (var i = 0; i < inputs.length; i++) output[i] = Math.floor((inputs[i] * 1.00 / total) * 1000) / 10;
+      return output;
+    }
+
+    function submitButton() {
+      var indep = 1;
+      var dep = 1;
+      var vis = 1;
+      var aud = 1;
+      var kin = 1;
+      var indordbar = document.getElementById("indepordep").value - 4;
+      if (indordbar > 0) indep += indordbar;
+      else dep += -indordbar;
+      var questionOrder = ["first", "remember", "action", "peoplememory", "cat", "class"];
+      for (var i = 0; i < questionOrder.length; i++) {
+        var selected = document.querySelector("input[name='" + questionOrder[i] + "']:checked");
+        if (selected == null) {
+          alert("please fill out all questions");
+          return;
+        }
+        switch (selected.value) {
+          case "auditory":
+            aud++;
+            break;
+          case "visual":
+            vis++;
+            break;
+          case "kinesthetic":
+            kin++;
+            break;
+          case "independent":
+            indep++;
+            break;
+          case "dependent":
+            dep++;
+            break;
+          default:
+            alert(" radio value error");
+        }
+      }
+      showResults(average([aud, vis, kin]), average([indep, dep]));
+    }
+
+    function showResults(res1, res2) {
+      var form = document.getElementById("form");
+      form.style.display = "none";
+      document.getElementById("head").textContent = "So what kind of learner are you?";
+      document.getElementById("resultstab").style.display = "block";
+      document.getElementById("indep").textContent = res2[0] + "% independent";
+      document.getElementById("dep").textContent = res2[1] + "% dependent";
+      document.getElementById("aud").textContent = res1[0] + "% auditory";
+      document.getElementById("vis").textContent = res1[1] + "% visual";
+      document.getElementById("kin").textContent = res1[2] + "% kinesthetic";
+    }
+  </script>
 </html>

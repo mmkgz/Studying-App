@@ -1,26 +1,156 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-  <style>
-    @font-face {
-      font-family: "antipasto";
-      src: url("./assets/AntipastoPro-Medium_trial.ttf");
-    }
-    #container{
-      text-align: center;
-    }
-  </style>
-  <div id="container">
-    <h1>Student End</h1>
-    <label for="classCodeInput">please enter a class code provided by your teacher / administrator:</label>
-    <br>
-    <input style="margin:10px;"name="classCodeInput"type="text">  
-    <br>
-    <button onclick="submitClassCode()">Submit</button>
-  </div>
-  <script>
-    function submitClassCode(){
-      alert("class code submitted");
-      
-    }
-  </script>
+    <style>
+        *{
+	        font-family: "Verdana";
+        }
+        #container{
+            background-color:#73a6ff;
+            position:absolute;
+            left:0;right:0;top:0;bottom:0;
+            text-align: center;
+        }
+        body {
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30rem;
+    padding: 3.5rem;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #dadce0;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+
+}
+
+.box h2 {
+    margin: 0px 0 -0.125rem;
+    padding: 0;
+    text-align: center;
+    color: #202124;
+    font-size: 90px;
+    font-weight: 400;
+}
+
+.box p {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.box .inputBox {
+    position: relative;
+}
+
+.box .inputBox input {
+    width: 93%;
+    padding: 1.3rem 10px;
+    font-size: 1rem;
+   letter-spacing: 0.062rem;
+   margin-bottom: 1.875rem;
+   border: 1px solid #ccc;
+   background: transparent;
+   border-radius: 4px;
+}
+
+.box .inputBox label {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    padding: 0.625rem 0;
+    font-size: 1rem;
+    color: gray;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+
+
+.box .inputBox input:focus {
+    outline: none;
+    border: 2px solid #fafafa;
+}
+
+.box input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #1a73e8;
+    padding: 0.625rem 1.25rem;
+    cursor: pointer;
+    border-radius: 0.312rem;
+    font-size: 1rem;
+    float: right;
+  }
+
+  .box input[type="submit"]:hover {
+    background-color: #287ae6;
+    box-shadow: 0 1px 1px 0 rgba(66,133,244,0.45), 0 1px 3px 1px rgba(66,133,244,0.3);
+  }
+  /* HTML: <div class="loader"></div> */
+.loader {
+    position:absolute;
+    font-size: larger;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+  width: 200px;
+  aspect-ratio: 2;
+  --_g: no-repeat radial-gradient(circle closest-side,#202020 90%,#0000);
+  background: 
+    var(--_g) 0%   50%,
+    var(--_g) 50%  50%,
+    var(--_g) 100% 50%;
+  background-size: calc(100%/3) 50%;
+  animation: l3 1.2s infinite linear;
+}
+@keyframes l3 {
+    20%{background-position:0%   0%, 50%  50%,100%  50%}
+    40%{background-position:0% 100%, 50%   0%,100%  50%}
+    60%{background-position:0%  50%, 50% 100%,100%   0%}
+    80%{background-position:0%  50%, 50%  50%,100% 100%}
+}
+    </style>
+    <body>
+        <div id="container">
+            <div class="box">
+                <h2>Sign In</h2><br>
+                <form>
+                    <div class="inputBox">
+                        <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);"  value="">
+                        <label>Username</label>
+                    </div>
+                <div class="inputBox">
+                    <input type="text" name="text" required onkeyup="this.setAttribute('value', this.value);" value="">
+                    <label>Password</label>
+                </div>
+                <input type="submit" name="sign-in" value="Sign In" onclick="submitTheForm()">
+              </form>
+            </div>
+            <div class="loader" style="display:none">Logging you in...</div>
+        </div>
+    </body>
+    <script>
+        function submitTheForm(){
+            document.querySelector(".box").style.display="none";
+            document.querySelector(".loader").style.display="block";
+            setTimeout(function (){
+                localStorage.setItem("logged-in",true);
+                location.href="index.html";
+
+            },4795);
+        }
+    </script>
 </html>

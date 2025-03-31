@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #4a8af7;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1em;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+        }
+
+        section {
+            background-color: #fff;
+            padding: 1em;
+            margin: 1em;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 0.5em;
+            border-bottom: 1px solid #ccc;
+        }
+
+        li:last-child {
+            border-bottom: none;
+        }
+
+        button {
+            background-color: #4a8af7;
+            color: #fff;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #3f7ce6;
+        }
+
+        #flashcard-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #flashcard {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            transition: transform 0.5s;
+        }
+
+        #front {
+            transform: rotateY(0deg);
+            backface-visibility: hidden;
+        }
+
+        #back {
+            transform: rotateY(180deg);
+            backface-visibility: hidden;
+        }
+
+        .flipped #front {
+            transform: rotateY(-180deg);
+        }
+
+        .flipped #back {
+            transform: rotateY(0deg);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flashcard Viewer</h1>
+    </header>
+    <main>
+        <section id="deck-section">
+            <h2>Decks</h2>
+            <select id="deck-select"></select>
+        </section>
+        <section id="flashcard-section">
+            <h2>Flashcards</h2>
+            <div id="flashcard-container">
+                <div id="flashcard" onclick="flipFlashcard()">
+                    <div id="front"></div>
+                    <div id="back"></div>
+                </div>
+                <button id="flip-btn">Flip</button>
+                <button id="next-btn">Next</button>
+                <button id="back-btn" style="display: none;">Back to Editor</button>
+            </div>
+        </section>
+        <a href="flashcards-create.html">Edit Flashcards</a>
+        <a href="index.html">Back to Home</button>
+    </main>
+    <script>
+        // Get elements
+        const deckSelect = document.getElementById('deck-select');
+        const flashcardContainer = document.getElementById('flashcard-container');
+        const flashcard = document.getElementById('flashcard');
+        const front = document.getElementById('front');
+        const back = document.getElementById('back');
+        const flipBtn = document.getElementById('flip-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const backBtn = document.getElementById('back-btn');
+
+        // Initialize data
+        let decks = JSON.parse(localStorage.getItem('decks'));
+        let currentDeck = null;
+        let currentFlashcard = 0;
+
+        if (decks === null) {
+            decks = [];
+        }
+
+        // Function to render decks
+        function renderDecks() {
+            deckSelect.innerHTML = '';
+            decks.forEach((deck, index) => {
+                if (deck !== null) {
+                    const option = document.createElement('option');
+                    option.textContent = deck.name;
+                    option.value = index;
+                    deckSelect.appendChild(option);
+                }
+            });
+            deckSelect.addEventListener('change', () => {
+                const selectedIndex = deckSelect.value;
+                if (selectedIndex >= 0 && selectedIndex < decks.length) {
+                    currentDeck = decks[selectedIndex];
+                    renderFlashcards();
+                }
+            });
+            if (decks.length > 0) {
+                currentDeck = decks[0];
+                renderFlashcards();
+            }
+        }
+
+        // Function to render flashcards
+        function renderFlashcards() {
+            if (currentDeck !== null && currentDeck.flashcards !== null) {
+                if (currentFlashcard < currentDeck.flashcards.length) {
+                    const flashcardData = currentDeck.flashcards[currentFlashcard];
+                    if (flashcardData !== null) {
+                        front.textContent = flashcardData.question;
+                        back.textContent = flashcardData.answer;
+                        flashcardContainer.style.display = 'block';
+                    } else {
+                        flashcardContainer.style.display = 'none';
+                    }
+                } else {
+                    flashcardContainer.style.display = 'none';
+                }
+            } else {
+                flashcardContainer.style.display = 'none';
+            }
+        }
+
+        // Function to flip flashcard
+        function flipFlashcard() {
+            flashcard.classList.toggle('flipped');
+        }
+
+        // Function to next flashcard
+        function nextFlashcard() {
+            currentFlashcard++;
+            renderFlashcards();
+        }
+
+        // Function to back to editor
+        function backToEditor() {
+            window.location.href = 'flashcards-create.html';
+        }
+
+        // Event listeners
+        flipBtn.addEventListener('click', flipFlashcard);
+
+        nextBtn.addEventListener('click', nextFlashcard);
+
+        backBtn.addEventListener('click', backToEditor);
+
+        // Render decks
+        renderDecks();
+    </script>
+</body>
+</html>

@@ -2,20 +2,16 @@
 <!DOCTYPE html>
 <html>
 <style>
-    @font-face {
-        font-family: "antipasto";
-        src: url("./assets/AntipastoPro-Medium_trial.ttf");
+    #imadiv{
+        width:600px;
+        position:relative;
+        left:50%;
+        height:250px;
+        transform:translateX(-50%);
+        overflow:visible;
     }
-#imadiv{
-    width:600px;
-    position:relative;
-    left:50%;
-    height:250px;
-    transform:translateX(-50%);
-    overflow:visible;
-}
     *{
-	font-family: antipasto;
+        font-family: "Verdana";
     }
     #container{
         position:absolute;
@@ -51,7 +47,7 @@
   <hr>
   <h2>Ready to <b>Learn</b>?</h2>
   <div id="imadiv">
-    <button onclick="location.href='teacher';"class="ima transhover" style="float:left;left:10px;background-color:">I'm a <b>Teacher</b></button>
+    <button onclick="location.href='teacher';"class="ima transhover" style="float:left;left:10px;">I'm a <b>Teacher</b></button>
 
     <button onclick="location.href='student';"class="ima transhover" style="float:right;right:10px">I'm a <b>Student</b></button>
 

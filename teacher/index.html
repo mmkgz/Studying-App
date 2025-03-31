@@ -1,1 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Style Classroom Manager</title>
+    <style>
+        :root {
+            --primary-color: #73a6ff;
+            --primary-light: #e6f0ff;
+            --primary-dark: #5a8ae6;
+            --visual-color: #6dd47e;
+            --auditory-color: #ffd166;
+            --kinesthetic-color: #ff9e7d;
+            --independent-color: #a5c4ff;
+            --dependent-color: #ffb3ba;
+            --light-color: #f8faff;
+            --dark-color: #2a3a4a;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(115, 166, 255, 0.2);
+        }
 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 25px 0;
+            margin-bottom: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        .sidebar {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+            height: fit-content;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 5px 0;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-visual {
+            background-color: var(--visual-color);
+            color: white;
+        }
+
+        .btn-auditory {
+            background-color: var(--auditory-color);
+            color: var(--dark-color);
+        }
+
+        .btn-kinesthetic {
+            background-color: var(--kinesthetic-color);
+            color: white;
+        }
+
+        .learning-style-tag {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            margin-right: 5px;
+        }
+
+        .tag-visual {
+            background-color: var(--visual-color);
+            color: white;
+        }
+
+        .tag-auditory {
+            background-color: var(--auditory-color);
+            color: var(--dark-color);
+        }
+
+        .tag-kinesthetic {
+            background-color: var(--kinesthetic-color);
+            color: white;
+        }
+
+        .tag-independent {
+            background-color: var(--independent-color);
+            color: var(--dark-color);
+        }
+
+        .tag-dependent {
+            background-color: var(--dependent-color);
+            color: var(--dark-color);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+        }
+
+        .card {
+            background-color: var(--primary-light);
+            border-radius: var(--border-radius);
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-header {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-btn.active {
+            border-bottom: 3px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .class-list {
+            list-style: none;
+        }
+
+        .class-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .class-item:hover {
+            background-color: var(--primary-light);
+        }
+
+        .class-item.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .assignment-list, .topic-list, .student-list {
+            margin-top: 20px;
+        }
+
+        .assignment-item, .topic-item, .student-item {
+            padding: 15px;
+            border: 1px solid #eee;
+            border-radius: var(--border-radius);
+            margin-bottom: 10px;
+            background-color: white;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background-color: #eee;
+            border-radius: 5px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--visual-color);
+            width: 0%;
+        }
+
+        .style-selector {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .style-option {
+            padding: 8px 12px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .style-option.selected {
+            border: 2px solid var(--dark-color);
+            font-weight: bold;
+        }
+
+        .style-option.visual {
+            background-color: var(--visual-color);
+            color: white;
+        }
+
+        .style-option.auditory {
+            background-color: var(--auditory-color);
+            color: var(--dark-color);
+        }
+
+        .style-option.kinesthetic {
+            background-color: var(--kinesthetic-color);
+            color: white;
+        }
+
+        .style-option.independent {
+            background-color: var(--independent-color);
+            color: var(--dark-color);
+        }
+
+        .style-option.dependent {
+            background-color: var(--dependent-color);
+            color: var(--dark-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Learning Style Classroom Manager</h1>
+            <p class="app-description">Tailor your teaching to diverse learning styles</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="dashboard">
+            <div class="sidebar">
+                <h2>Your Classes</h2>
+                <button id="new-class-btn" class="btn btn-primary">+ New Class</button>
+                <ul class="class-list" id="class-list">
+                    <li class="class-item active" data-class-id="class1">Math 101</li>
+                    <li class="class-item" data-class-id="class2">Science 202</li>
+                </ul>
+            </div>
+
+            <div class="main-content">
+                <div class="tab-header">
+                    <button class="tab-btn active" data-tab="overview">Overview</button>
+                    <button class="tab-btn" data-tab="assignments">Assignments</button>
+                    <button class="tab-btn" data-tab="students">Students</button>
+                </div>
+
+                <div id="overview-tab" class="tab-content active">
+                    <h2 id="current-class-name">Math 101</h2>
+                    <div class="card">
+                        <h3>Create New Topic</h3>
+                        <div class="form-group">
+                            <label for="topic-name">Topic Name</label>
+                            <input type="text" id="topic-name" class="form-control" placeholder="Enter topic name">
+                        </div>
+                        <div class="form-group">
+                            <label for="due-date">Due Date</label>
+                            <input type="date" id="due-date" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Recommended Learning Styles</label>
+                            <div class="style-selector">
+                                <div class="style-option visual">Visual</div>
+                                <div class="style-option auditory">Auditory</div>
+                                <div class="style-option kinesthetic">Kinesthetic</div>
+                                <div class="style-option independent">Independent</div>
+                                <div class="style-option dependent">Dependent</div>
+                            </div>
+                        </div>
+                        
+                        <button id="add-topic-btn" class="btn btn-primary">Post Topic</button>
+                    </div>
+
+                    <div class="topic-list">
+                        <h3>Current Topics</h3>
+                        <div class="topic-item">
+                            <h4>Algebra Basics 
+                                <span class="learning-style-tag tag-visual">Visual</span>
+                                <span class="learning-style-tag tag-independent">Independent</span>
+                            </h4>
+                            <p>Due: May 15, 2023</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                            <p>75% of students completed</p>
+                        </div>
+                        <div class="topic-item">
+                            <h4>Geometry Introduction 
+                                <span class="learning-style-tag tag-kinesthetic">Kinesthetic</span>
+                                <span class="learning-style-tag tag-dependent">Dependent</span>
+                            </h4>
+                            <p>Due: May 22, 2023</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 30%"></div>
+                            </div>
+                            <p>30% of students completed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="assignments-tab" class="tab-content">
+                    <h2>Assignments</h2>
+                    <div class="card">
+                        <h3>Create New Assignment</h3>
+                        <div class="form-group">
+                            <label for="assignment-name">Assignment Name</label>
+                            <input type="text" id="assignment-name" class="form-control" placeholder="Enter assignment name">
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-instructions">Instructions</label>
+                            <textarea id="assignment-instructions" class="form-control" rows="4"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="assignment-due-date">Due Date</label>
+                            <input type="date" id="assignment-due-date" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Learning Style Focus</label>
+                            <div class="style-selector">
+                                <div class="style-option visual">Visual</div>
+                                <div class="style-option auditory">Auditory</div>
+                                <div class="style-option kinesthetic">Kinesthetic</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Work Style</label>
+                            <div class="style-selector">
+                                <div class="style-option independent">Independent</div>
+                                <div class="style-option dependent">Dependent</div>
+                            </div>
+                        </div>
+                        
+                        <button id="create-assignment-btn" class="btn btn-primary">Create Assignment</button>
+                    </div>
+
+                    <div class="assignment-list">
+                        <h3>Current Assignments</h3>
+                        <div class="assignment-item">
+                            <h4>Algebra Worksheet #1 
+                                <span class="learning-style-tag tag-visual">Visual</span>
+                                <span class="learning-style-tag tag-independent">Independent</span>
+                            </h4>
+                            <p><strong>Due:</strong> May 12, 2023</p>
+                            <p>Complete problems 1-20 showing all work</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 85%"></div>
+                            </div>
+                            <p>85% of students submitted</p>
+                        </div>
+                        <div class="assignment-item">
+                            <h4>Geometry Quiz 
+                                <span class="learning-style-tag tag-kinesthetic">Kinesthetic</span>
+                                <span class="learning-style-tag tag-dependent">Dependent</span>
+                            </h4>
+                            <p><strong>Due:</strong> May 19, 2023</p>
+                            <p>Angles and shapes identification</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 45%"></div>
+                            </div>
+                            <p>45% of students submitted</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="students-tab" class="tab-content">
+                    <h2>Student Progress by Learning Style</h2>
+                    
+                    <div class="card">
+                        <h3>Student Learning Profiles</h3>
+                        <div class="student-list">
+                            <div class="student-item">
+                                <h4>John Doe</h4>
+                                <div>
+                                    <span class="learning-style-tag tag-visual">Visual</span>
+                                    <span class="learning-style-tag tag-independent">Independent</span>
+                                </div>
+                                <p><strong>Performance:</strong> 92% average</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="student-item">
+                                <h4>Jane Smith</h4>
+                                <div>
+                                    <span class="learning-style-tag tag-auditory">Auditory</span>
+                                    <span class="learning-style-tag tag-dependent">Dependent</span>
+                                </div>
+                                <p><strong>Performance:</strong> 87% average</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div class="student-item">
+                                <h4>Mike Johnson</h4>
+                                <div>
+                                    <span class="learning-style-tag tag-kinesthetic">Kinesthetic</span>
+                                    <span class="learning-style-tag tag-independent">Independent</span>
+                                </div>
+                                <p><strong>Performance:</strong> 78% average</p>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Learning Style Recommendations</h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 15px;">
+                            <div>
+                                <h4>Visual Learners</h4>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Use diagrams and charts</li>
+                                    <li>Provide written instructions</li>
+                                    <li>Color-code information</li>
+                                    <li>Use visual organizers</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Auditory Learners</h4>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Record lectures</li>
+                                    <li>Use verbal explanations</li>
+                                    <li>Encourage discussions</li>
+                                    <li>Use rhymes or songs</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Kinesthetic Learners</h4>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li>Hands-on activities</li>
+                                    <li>Incorporate movement</li>
+                                    <li>Use physical objects</li>
+                                    <li>Allow for frequent breaks</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Work Style Tips</h4>
+                                <ul style="margin-top: 10px; padding-left: 20px;">
+                                    <li><strong>Independent:</strong> Self-paced work</li>
+                                    <li><strong>Independent:</strong> Individual projects</li>
+                                    <li><strong>Dependent:</strong> Group activities</li>
+                                    <li><strong>Dependent:</strong> Guided instruction</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Class Modal -->
+    <div id="new-class-modal" class="modal">
+        <div class="modal-content">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3>Create New Class</h3>
+                <button id="close-class-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="form-group">
+                <label for="class-name">Class Name</label>
+                <input type="text" id="class-name" class="form-control" placeholder="Enter class name">
+            </div>
+            <div class="form-group">
+                <label for="class-description">Description (optional)</label>
+                <textarea id="class-description" class="form-control" rows="3"></textarea>
+            </div>
+            <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px;">
+                <button id="cancel-class-btn" class="btn btn-secondary">Cancel</button>
+                <button id="save-class-btn" class="btn btn-primary">Create Class</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab navigation
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const tabId = btn.getAttribute('data-tab');
+                    
+                    // Update active tab button
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    // Update active tab content
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    document.getElementById(`${tabId}-tab`).classList.add('active');
+                });
+            });
+
+            // Class selection
+            const classItems = document.querySelectorAll('.class-item');
+            classItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    classItems.forEach(i => i.classList.remove('active'));
+                    item.classList.add('active');
+                    document.getElementById('current-class-name').textContent = item.textContent;
+                });
+            });
+
+            // New class modal
+            const newClassBtn = document.getElementById('new-class-btn');
+            const newClassModal = document.getElementById('new-class-modal');
+            const closeClassModal = document.getElementById('close-class-modal');
+            const cancelClassBtn = document.getElementById('cancel-class-btn');
+            
+            newClassBtn.addEventListener('click', () => {
+                newClassModal.style.display = 'flex';
+            });
+            
+            closeClassModal.addEventListener('click', () => {
+                newClassModal.style.display = 'none';
+            });
+            
+            cancelClassBtn.addEventListener('click', () => {
+                newClassModal.style.display = 'none';
+            });
+            
+            // Save new class
+            const saveClassBtn = document.getElementById('save-class-btn');
+            saveClassBtn.addEventListener('click', () => {
+                const className = document.getElementById('class-name').value.trim();
+                if (className) {
+                    const classList = document.getElementById('class-list');
+                    const newClass = document.createElement('li');
+                    newClass.className = 'class-item';
+                    newClass.textContent = className;
+                    newClass.setAttribute('data-class-id', `class${Date.now()}`);
+                    newClass.addEventListener('click', function() {
+                        classItems.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        document.getElementById('current-class-name').textContent = this.textContent;
+                    });
+                    classList.appendChild(newClass);
+                    
+                    // Reset and close modal
+                    document.getElementById('class-name').value = '';
+                    document.getElementById('class-description').value = '';
+                    newClassModal.style.display = 'none';
+                }
+            });
+
+            // Learning style selection
+            const styleOptions = document.querySelectorAll('.style-option');
+            styleOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    this.classList.toggle('selected');
+                });
+            });
+
+            // Create assignment
+            const createAssignmentBtn = document.getElementById('create-assignment-btn');
+            createAssignmentBtn.addEventListener('click', () => {
+                const assignmentName = document.getElementById('assignment-name').value.trim();
+                const dueDate = document.getElementById('assignment-due-date').value;
+                
+                if (assignmentName && dueDate) {
+                    const assignmentList = document.querySelector('.assignment-list');
+                    const newAssignment = document.createElement('div');
+                    newAssignment.className = 'assignment-item';
+                    
+                    // Get selected styles
+                    const selectedStyles = [];
+                    document.querySelectorAll('.style-option.selected').forEach(style => {
+                        if (style.classList.contains('visual')) selectedStyles.push('visual');
+                        if (style.classList.contains('auditory')) selectedStyles.push('auditory');
+                        if (style.classList.contains('kinesthetic')) selectedStyles.push('kinesthetic');
+                        if (style.classList.contains('independent')) selectedStyles.push('independent');
+                        if (style.classList.contains('dependent')) selectedStyles.push('dependent');
+                    });
+                    
+                    // Create tags HTML
+                    let tagsHtml = '';
+                    selectedStyles.forEach(style => {
+                        tagsHtml += `<span class="learning-style-tag tag-${style}">${style.charAt(0).toUpperCase() + style.slice(1)}</span> `;
+                    });
+                    
+                    newAssignment.innerHTML = `
+                        <h4>${assignmentName} ${tagsHtml}</h4>
+                        <p><strong>Due:</strong> ${new Date(dueDate).toLocaleDateString()}</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p>0% of students submitted</p>
+                    `;
+                    
+                    assignmentList.insertBefore(newAssignment, assignmentList.children[1]);
+                    
+                    // Reset form
+                    document.getElementById('assignment-name').value = '';
+                    document.getElementById('assignment-instructions').value = '';
+                    document.getElementById('assignment-due-date').value = '';
+                    styleOptions.forEach(option => option.classList.remove('selected'));
+                }
+            });
+
+            // Add topic
+            const addTopicBtn = document.getElementById('add-topic-btn');
+            addTopicBtn.addEventListener('click', () => {
+                const topicName = document.getElementById('topic-name').value.trim();
+                const dueDate = document.getElementById('due-date').value;
+                
+                if (topicName && dueDate) {
+                    const topicList = document.querySelector('.topic-list');
+                    const newTopic = document.createElement('div');
+                    newTopic.className = 'topic-item';
+                    
+                    // Get selected styles
+                    const selectedStyles = [];
+                    document.querySelectorAll('.style-option.selected').forEach(style => {
+                        if (style.classList.contains('visual')) selectedStyles.push('visual');
+                        if (style.classList.contains('auditory')) selectedStyles.push('auditory');
+                        if (style.classList.contains('kinesthetic')) selectedStyles.push('kinesthetic');
+                        if (style.classList.contains('independent')) selectedStyles.push('independent');
+                        if (style.classList.contains('dependent')) selectedStyles.push('dependent');
+                    });
+                    
+                    // Create tags HTML
+                    let tagsHtml = '';
+                    selectedStyles.forEach(style => {
+                        tagsHtml += `<span class="learning-style-tag tag-${style}">${style.charAt(0).toUpperCase() + style.slice(1)}</span> `;
+                    });
+                    
+                    newTopic.innerHTML = `
+                        <h4>${topicName} ${tagsHtml}</h4>
+                        <p>Due: ${new Date(dueDate).toLocaleDateString()}</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <p>0% of students completed</p>
+                    `;
+                    
+                    topicList.insertBefore(newTopic, topicList.children[1]);
+                    
+                    // Reset form
+                    document.getElementById('topic-name').value = '';
+                    document.getElementById('due-date').value = '';
+                    styleOptions.forEach(option => option.classList.remove('selected'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

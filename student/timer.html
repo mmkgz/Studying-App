@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+  <style>
+    *{
+        font-family: "Verdana";
+    }
+    #container{
+      text-align: center;
+      position:absolute;left:0;right:0;top:0;bottom:0;
+      background-color:#4a8af7;
+    }
+    #numDisplay{
+      position:relative;
+      grid-area: number;
+      font-size: 10vmin;
+    }
+
+    #styleContainer{
+        position:absolute;
+        left:50%;top:50%;
+        transform: translate(-50%,-50%);
+        background-color: rgba(255, 255, 255, 0.363);
+        border-radius: 15px 15px;
+        aspect-ratio: 900/750;
+        width:30%;
+        display:grid;
+        grid-template-rows: 1fr 9fr 6fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        padding:60px;
+        grid-template-areas: 
+            "settings settings"
+            "number number"
+            "control end";
+    }
+
+    .controlButton{
+        width: auto;
+        height:auto;
+        border-radius: 50px 50px;
+        font-size: 4vmin;
+        font-family: "Verdana";
+        background-color: rgba(255, 255, 255, 0.267);
+        border-color: transparent;
+    }
+    .controlButton:hover{
+        background-color: rgba(0, 0, 0, 0.164);
+    }
+    .controlButton:active{
+        background-color: rgba(0, 0, 0, 0.418);
+    }
+    .control{
+        grid-area: control;
+    }
+
+    .end{
+        grid-area: end;
+    }
+    .settings{
+        grid-area: settings;
+    }
+  </style>
+  <div id="container">
+    <div id="styleContainer">
+      <div class="settings">
+        <label for="bgColor">Background Color: </label>
+        <input type="color" id="bgColor" onchange="changeBackgroundColor()" value="#4a8af7"><br>
+        <label for="workTime">Work Minutes: </label>
+        <input type="number" id="workTime" min="1" value="25"><br>
+        <label for="breakTime">Break Minutes: </label>
+        <input type="number" id="breakTime" min="1" value="5"><br>
+        <button onclick="applySettings()">Apply</button>
+      </div>
+      <h1 id="numDisplay" class="number">25:00</h1>
+      <button class = "control controlButton" onclick="timerResume()">Start</button>
+      <button class = "end controlButton" onclick="if(confirm('Are you sure you want to end this session?'))location.href = 'index.html'">End Session</button>
+    </div>
+  </div>
+  
+  <script>
+    var controlButton = document.querySelector(".control");
+    var workMinutes = 25;
+    var breakMinutes = 5;
+    var isBreak = false;
+    var timeToWait = workMinutes * 60;
+    var timeLeft = timeToWait;
+    var numberDisplay = document.getElementById("numDisplay");
+    var timerInterval;
+
+    function startTimer() {
+        var initial = performance.now() / 1000;
+        timerInterval = setInterval(function () {
+            timeLeft = Math.floor(timeToWait - (performance.now() / 1000 - initial));
+            numberDisplay.textContent = formatTime(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerEnd();
+            }
+        }, 1);
+    }
+
+    function formatTime(num) {
+        var minutes = Math.floor(num / 60);
+        var seconds = num % 60;
+        return (minutes < 10 ? "0" : "") + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+
+    function timerEnd() {
+        if (isBreak) {
+            alert("Break Over! Time to work again.");
+            timeToWait = workMinutes * 60 ;
+            isBreak = false;
+        } else {
+            alert("Work Session Over! Take a break.");
+            timeToWait = breakMinutes * 60;
+            isBreak = true;
+        }
+        timeLeft = timeToWait;
+        numberDisplay.textContent = formatTime(timeLeft);
+        startTimer();
+    }
+
+    function timerPause() {
+        clearInterval(timerInterval);
+        controlButton.onclick = timerResume;
+        controlButton.textContent = "Resume";
+    }
+
+    function timerResume() {
+        timeToWait=Math.ceil(timeLeft)+1;
+        startTimer();
+        controlButton.onclick = timerPause;
+        controlButton.textContent = "Pause";
+    }
+    
+    function changeBackgroundColor() {
+        document.getElementById("container").style.backgroundColor = document.getElementById("bgColor").value;
+    }
+
+    function applySettings() {
+        if(!confirm("Are you sure you want to apply these changes? Doing so will end your current session."))return;
+        workMinutes = Math.ceil(document.getElementById("workTime").value);
+        breakMinutes = Math.ceil(document.getElementById("breakTime").value);
+        timeToWait = workMinutes * 60+1;
+        timeLeft = timeToWait;
+        clearInterval(timerInterval);
+        startTimer();
+    }
+
+    
+  </script>
+</html>

@@ -1,10 +1,34 @@
 <!DOCTYPE html>
-<html>
-  <script>
-    let loggedin = localStorage.getItem("logged-in");
-    if(!loggedin){
-      location.href="login.html";
-    }
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Buddy - Student</title>
+    <script>
+        let loggedin = localStorage.getItem("logged-in");
+        if (!loggedin) {
+            location.href = "login.html";
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-200 flex flex-col h-screen">
     
-  </script>
+    <!-- Navigation Bar -->
+    <nav class="bg-blue-500 text-white p-4 flex justify-center space-x-6 shadow-md">
+        
+        <a href="timer.html" class="hover:underline">Pomodoro</a>
+        <a href="notes.html" class="hover:underline">Notes</a>
+        <a href="flashcards.html" class="hover:underline">Flashcards</a>
+        <a href="#practice" class="hover:underline">Practice</a>
+        <a href="kanban.html" class="hover:underline">Kanban Board</a>
+        <a href="#audio" class="hover:underline">Audio</a>
+        <a href="#kinesthetic" class="hover:underline">Kinesthetic</a>
+    </nav>
+    
+    <!-- Content Container -->
+    <div id="container" class="flex-1 flex items-center justify-center text-center p-10">
+        <h1 class="text-4xl font-bold text-gray-700">Welcome to Studdy Buddy</h1>
+    </div>
+</body>
 </html>
