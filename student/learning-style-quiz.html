@@ -8,7 +8,7 @@
       text-align: center;
       background-color:#73a6ff;
       position:absolute;
-      left:0;right:0;top:0;bottom:0;
+      left:0;right:0;top:0;bottom:-50%;
     }
 
     .quizlabel {
@@ -54,7 +54,7 @@
       <h1>You are:</h1>
       <h2 id="indep">
         <br>
-      </h2>p
+      </h2>
       <h2 id="dep">
         <br>
       </h2>
@@ -70,6 +70,57 @@
       <h2 id="kin">
         <br>
       </h2>
+      <hr>
+      <p style="margin-left:20%;margin-right:20%;display:none" id="visuala">
+        <h1>Visual</h1>
+As a visual learner you grasp information through reading or visual aids and remember by sight. You prefer visual learning methods and are neat and clean. Visualizing concepts is natural for you, and you might close your eyes for recall. When bored, you seek visual stimuli but may struggle with spoken directions and get distracted by sounds. Richly visual content, including colorful imagery and vivid stories, attracts your attention.
+Here are some things that visual learners like you can do to learn better:
+Sit near the front of the classroom. (It won't mean you're the teacher's pet!)
+Have your eyesight checked on a regular basis.
+Use flashcards to learn new words.
+Try to visualize things that you hear or things that are read to you.
+Write down key words, ideas, or instructions.
+Draw pictures to help explain new concepts and then explain the pictures.
+Color code things.
+Avoid distractions during study times.
+Remember that you need to see things, not just hear things, to learn well.
+
+      </p>
+      <p style="margin-left:20%;margin-right:20%;display:none" id="tactilea">
+        <h1>Tactile</h1>
+Tactile learners prefer hands-on activities, physical movement, and learning through touch. You excel when engaged in active, dynamic learning experiences, often requiring breaks, and may find it challenging to sit still.
+
+As a tactile learner, you enjoy hands-on activities such as dismantling and assembling things. When you are bored, you tend to tinker or move around. Your good coordination and athletic ability stand out. While you easily recall actions, visual or auditory information might be challenging. Touch is your preferred communication style, and you appreciate physical forms of encouragement, like a pat on the back.
+ Try to connect information with movements to learn and retain information better. 
+
+Here are some things that tactile learners like you can do to learn better:
+
+Participate in activities that involve touching, building, moving, or drawing.
+Do lots of hands-on activities like completing art projects, taking walks, or acting out stories.
+It's okay to chew gum, walk around, or rock in a chair while reading or studying.
+Use flashcards and arrange them in groups to show relationships between ideas.
+Trace words with your finger to learn spelling (finger spelling).
+Take frequent breaks during reading or studying periods (frequent, but not long).
+It's okay to tap a pencil, shake your foot, or hold on to something while learning.
+Use a computer to reinforce learning through the sense of touch.
+Remember that you learn best by doing, not just by reading, seeing, or hearing.
+
+      </p>
+      <p style="margin-left:20%;margin-right:20%;display:none" id="auditorya">
+        <h1>Auditory</h1>
+As an auditory learner, you grasp information best through hearing. Reading aloud helps you learn, and you might hum or talk when you become bored. You absorb and understand spoken information more effectively than others. Try to use this to your advantage by understanding and paying attention. 
+Here are some things that auditory learners like you can do to learn better.
+Sit where you can hear the information being shared. 
+Have your hearing checked on a regular basis.
+Use flashcards to learn new words; read them out loud.
+Read stories, assignments, or directions out loud.
+Record yourself spelling words and then listen to the recording.
+Have test questions read to you out loud so that you can answer them with better comprehension.
+Study new material by reading it out loud. 
+Try using headphones often and practice explaining topics to others as a study method. 
+Remember that you need to hear things, not just see things, to learn well.
+
+      </p>
     </div>
     <div id="form">
       <label class='quizlabel'>Would you rather study at home or at the library with friends?</label><br>
@@ -120,7 +171,7 @@
       <br>
       <br>
       <br>
-      <label class='quizlabel'>You are more likely to remember someone’s:</label>
+      <label class='quizlabel'>You are more likely to remember someone's:</label>
       <br>
       <input type="radio" value="auditory" name="peoplememory" id="peo1">
       <label for="peo1">name</label>
@@ -162,6 +213,146 @@
       <br>
       <br>
       <br>
+      <label class='quizlabel' for="book">If you were forced to read a book, which book would you choose?</label>
+      <br>
+      <input type="radio" value="visual" name="book" id="bk1">
+      <label for="bk1">a comic book / graphic novel that has a lot of pictures</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="book" id="bk2">
+      <label for="bk2">a coloring book or puzzle book with puzzles like word searches</label>
+      <br>
+      <input type="radio" value="auditory" name="book" id="bk3">
+      <label for="bk3">an exciting novel with lots of chapters</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="spell">If you're unsure about how to spell a word, what are you most likely to do?</label>
+      <br>
+      <input type="radio" value="auditory" name="spell" id="sp1">
+      <label for="sp1">spell the word out loud</label>
+      <br>
+      <input type="radio" value="visual" name="spell" id="sp2">
+      <label for="sp2">write the word down</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="spell" id="sp3">
+      <label for="sp3">trace the shape of the word in the air with your finger</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="shop">You're out shopping for something (like clothes, video games, whatever you like), and you're waiting in line to pay. What are you most likely to do while you are waiting?</label>
+      <br>
+      <input type="radio" value="auditory" name="shop" id="sh1">
+      <label for="sh1">Talk to the person next to you in line</label>
+      <br>
+      <input type="radio" value="visual" name="shop" id="sh2">
+      <label for="sh2">browse around for more items</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="shop" id="sh3">
+      <label for="sh3">fidget and move around in line</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="dance">You went to a dance party last night. What part of it are you most likely to remember?</label>
+      <br>
+      <input type="radio" value="visual" name="dance" id="d1">
+      <label for="d1">the faces of the people you met</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="dance" id="d2">
+      <label for="d2">the food you ate and/or the dance moves you did</label>
+      <br>
+      <input type="radio" value="auditory" name="dance" id="d3">
+      <label for="d3">the music that was playing</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="dancedo">At the dance party from the previous question, what might you have done?</label>
+      <br>
+      <input type="radio" value="auditory" name="dancedo" id="da1">
+      <label for="da1">listen to the music that was playing</label>
+      <br>
+      <input type="radio" value="visual" name="dancedo" id="da2">
+      <label for="da2">watch other people dance and move</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="dancedo" id="da3">
+      <label for="da3">dance and move around, talking to others</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="distr">What do you find most distracting when you are trying to study?</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="distr" id="dis1">
+      <label for="dis1">sitting on an uncomfortable chair or being in an uncomfortable position</label>
+      <br>
+      <input type="radio" value="visual" name="distr" id="dis2">
+      <label for="dis2">other people walking or moving around in the background</label>
+      <br>
+      <input type="radio" value="auditory" name="distr" id="dis3">
+      <label for="dis3">hearing loud noises and sounds</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="happy">When you are happy, what are you most likely to do?</label>
+      <br>
+      <input type="radio" value="visual" name="happy" id="hp1">
+      <label for="hp1">put on a very big smile</label>
+      <br>
+      <input type="radio" value="auditory" name="happy" id="hp2">
+      <label for="hp2">talk a lot to anyone who will listen</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="happy" id="hp3">
+      <label for="hp3">be very hyper and run and jump around.</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="newp">When in a new place, how do you find your way around?</label>
+      <br>
+      <input type="radio" value="auditory" name="newp" id="new1">
+      <label for="new1">ask someone for directions</label>
+      <br>
+      <input type="radio" value="visual" name="newp" id="new2">
+      <label for="new2">look at a map</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="newp" id="new3">
+      <label for="new3">walk around - you'll get somewhere eventually</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="favclass">When you hear a song you like on the radio, what are you most likely to do?</label>
+      <br>
+      <input type="radio" value="visual" name="favclass" id="favc1">
+      <label for="favc1">imagine the things the song is singing about</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="favclass" id="favc2">
+      <label for="favc2">dance or tap your feet to the music</label>
+      <br>
+      <input type="radio" value="auditory" name="favclass" id="favc3">
+      <label for="favc3">hum or sing along to the music</label>
+      <br>
+      <br>
+      <br>
+      <br>
+      <label class='quizlabel' for="phone">Your friend gives you their phone number, but you don't have your phone on you! What would you do?</label>
+      <br>
+      <input type="radio" value="kinesthetic" name="phone" id="ph1">
+      <label for="ph1">trace the numbers with your finger</label>
+      <br>
+      <input type="radio" value="visual" name="phone" id="ph2">
+      <label for="ph2">picture the numbers in you head as you dial</label>
+      <br>
+      <input type="radio" value="auditory" name="phone" id="ph3">
+      <label for="ph3">repeatedly recite the numbers</label>
+      <br>
+      <br>
+      <br>
+      <br>
       <button id="submitbutton" onclick="submitButton()">Submit</button>
       <br>
     </div>
@@ -184,7 +375,7 @@
       var indordbar = document.getElementById("indepordep").value - 4;
       if (indordbar > 0) indep += indordbar;
       else dep += -indordbar;
-      var questionOrder = ["first", "remember", "action", "peoplememory", "cat", "class"];
+      var questionOrder = ["first", "remember", "action", "peoplememory", "cat", "class", "book", "spell","shop","dance","dancedo","distr","happy","newp","favclass","phone"];
       for (var i = 0; i < questionOrder.length; i++) {
         var selected = document.querySelector("input[name='" + questionOrder[i] + "']:checked");
         if (selected == null) {
@@ -208,7 +399,7 @@
             dep++;
             break;
           default:
-            alert(" radio value error");
+            alert("radio value error");
         }
       }
       showResults(average([aud, vis, kin]), average([indep, dep]));
@@ -224,6 +415,21 @@
       document.getElementById("aud").textContent = res1[0] + "% auditory";
       document.getElementById("vis").textContent = res1[1] + "% visual";
       document.getElementById("kin").textContent = res1[2] + "% kinesthetic";
+      var greatest;
+      if(res1[0]>res1[1])greatest=0;
+      if(res1[1]>res1[2])greatest=1;
+      if(res1[2]>res1[0])greatest=2;
+      alert(greatest);
+      switch(greatest){
+        case 0:
+          document.getElementById("auditorya").style.display="block";break;
+        case 1:
+          document.getElementById("visuala").style.display="block";break;
+        case 2:
+          document.getElementById("tactilea").style.display="block";break;
+      }
     }
   </script>
 </html>
+
+
